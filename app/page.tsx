@@ -26,9 +26,7 @@ export default function HomePage() {
     <main className="min-h-screen">
       <Navbar />
       <HeroSection />
-      <div id="how-it-works">
-        <ExplainerSections />
-      </div>
+      <ExplainerSections />
       <Footer />
     </main>
   )
