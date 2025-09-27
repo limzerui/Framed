@@ -6,20 +6,38 @@ import AnalyticsProvider from "@/components/analytics-provider"
 import { Suspense } from "react"
 import "./globals.css"
 
-const geist = V0_Font_Geist({ weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] })
-const geistMono = V0_Font_Geist_Mono({ weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] })
-const sourceSerif4 = V0_Font_Source_Serif_4({ weight: ["200", "300", "400", "500", "600", "700", "800", "900"] })
-
-import { Inter, Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
+import { Inter, Geist, Geist_Mono, Source_Serif_4, Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
 
 // Initialize fonts
 V0_Font_Geist({ weight: ["100","200","300","400","500","600","700","800","900"] })
 V0_Font_Geist_Mono({ weight: ["100","200","300","400","500","600","700","800","900"] })
 V0_Font_Source_Serif_4({ weight: ["200","300","400","500","600","700","800","900"] })
 
+// Initialize fonts with proper const assignments
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+})
+
+const geist = Geist({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+  variable: "--font-geist",
+  display: "swap",
+})
+
+const geistMono = Geist_Mono({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+  display: "swap",
+})
+
+const sourceSerif4 = Source_Serif_4({
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+  variable: "--font-source-serif-4",
   display: "swap",
 })
 
@@ -40,7 +58,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${geist.variable} antialiased`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${geist.variable} ${geistMono.variable} ${sourceSerif4.variable} antialiased`}
+    >
       <head>
         {/* Google Analytics */}
         {process.env.NEXT_PUBLIC_GA_ID && (
