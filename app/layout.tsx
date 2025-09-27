@@ -8,10 +8,22 @@ import "./globals.css"
 
 import { Inter, Geist, Geist_Mono, Source_Serif_4, Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
 
-// Initialize fonts
-V0_Font_Geist({ weight: ["100","200","300","400","500","600","700","800","900"] })
-V0_Font_Geist_Mono({ weight: ["100","200","300","400","500","600","700","800","900"] })
-V0_Font_Source_Serif_4({ weight: ["200","300","400","500","600","700","800","900"] })
+// Initialize fonts (assigned to constants as required by Next.js)
+const v0Geist = V0_Font_Geist({
+  weight: ["100","200","300","400","500","600","700","800","900"],
+  subsets: ["latin"],
+  preload: false
+})
+const v0GeistMono = V0_Font_Geist_Mono({
+  weight: ["100","200","300","400","500","600","700","800","900"],
+  subsets: ["latin"],
+  preload: false
+})
+const v0SourceSerif4 = V0_Font_Source_Serif_4({
+  weight: ["200","300","400","500","600","700","800","900"],
+  subsets: ["latin"],
+  preload: false
+})
 
 // Initialize fonts with proper const assignments
 const inter = Inter({
