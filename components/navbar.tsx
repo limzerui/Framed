@@ -35,7 +35,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Brand */}
           <Link href="/" className="font-bold text-xl text-gray-900">
-            Zine Studio
+            FRAMED
           </Link>
 
           {/* Center Navigation */}
@@ -47,7 +47,7 @@ export default function Navbar() {
 
           {/* CTA Button */}
           <Link
-            href="/start"
+            href="/themes"
             onClick={handleCTAClick}
             className="bg-gray-900 text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition-colors font-medium"
           >
