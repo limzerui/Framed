@@ -5,9 +5,11 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import Link from "next/link"
 import { trackEvent } from "@/lib/analytics"
 import { fadeInUp, staggerContainer, scrollIndicatorAnimation, prefersReducedMotion } from "@/lib/animations"
+import { usePrice } from "@/components/price-provider"
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const { price } = usePrice()
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -21,7 +23,8 @@ export default function HeroSection() {
     trackEvent("hero_cta_click", {
       category: "conversion",
       label: "primary_cta",
-      value: 15,
+      value: price,
+      price,
     })
   }
 

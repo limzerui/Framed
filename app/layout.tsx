@@ -3,6 +3,8 @@ import type React from "react"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import AnalyticsProvider from "@/components/analytics-provider"
+import ExperimentProvider from "@/components/experiment-provider"
+import PriceProvider from "@/components/price-provider"
 import { Suspense } from "react"
 import "./globals.css"
 
@@ -119,7 +121,11 @@ export default function RootLayout({
       </head>
       <body className="font-sans bg-white text-gray-900">
         <AnalyticsProvider>
-          <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+          <ExperimentProvider>
+            <PriceProvider>
+              <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+            </PriceProvider>
+          </ExperimentProvider>
         </AnalyticsProvider>
         <Analytics />
         <SpeedInsights />

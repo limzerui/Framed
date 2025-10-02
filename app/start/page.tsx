@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { trackEvent } from "@/lib/analytics"
+import { usePrice } from "@/components/price-provider"
 
 const styles = [
   {
@@ -55,6 +56,7 @@ function StylePickerContent() {
   const [selectedStyle, setSelectedStyle] = useState<string | null>(null)
   const searchParams = useSearchParams()
   const router = useRouter()
+  const { price } = usePrice()
 
   useEffect(() => {
     // Pre-select style from URL parameter
@@ -88,7 +90,8 @@ function StylePickerContent() {
     trackEvent("start_click", {
       category: "conversion",
       label: selectedStyle,
-      value: 15,
+      value: price,
+      price,
     })
 
     router.push(`/thanks?style=${selectedStyle}`)

@@ -1,24 +1,35 @@
 // Analytics utility functions
+import { getVariant as getABVariant } from "@/lib/experiment"
+import { getPrice } from "@/lib/price"
 export const trackEvent = (eventName: string, properties?: Record<string, any>) => {
   if (typeof window !== "undefined") {
+    const variant = getABVariant?.() ?? "hybrid"
+    const price = getPrice?.() ?? 15
+    const merged = {
+      test_name: properties?.test_name ?? "landing_design",
+      variant: properties?.variant ?? variant,
+      price: properties?.price ?? price,
+      ...properties,
+    }
+
     // Vercel Analytics
     if (window.va) {
-      window.va("track", eventName, properties)
+      window.va("track", eventName, merged)
     }
 
     // Google Analytics (if available)
     if (window.gtag) {
       window.gtag("event", eventName, {
-        event_category: properties?.category || "engagement",
-        event_label: properties?.label,
-        value: properties?.value,
-        ...properties,
+        event_category: merged?.category || "engagement",
+        event_label: merged?.label,
+        value: merged?.value,
+        ...merged,
       })
     }
 
     // Console log for development
     if (process.env.NODE_ENV === "development") {
-      console.log("📊 Analytics Event:", eventName, properties)
+      console.log("📊 Analytics Event:", eventName, merged)
     }
   }
 }
@@ -144,14 +155,4 @@ export const trackVariant = (testName: string, variant: string) => {
   })
 }
 
-// Feature flag tracking
-export const getVariant = (): "apple" | "adobe" | "hybrid" => {
-  if (typeof window === "undefined") return "hybrid"
-
-  const variant = (process.env.NEXT_PUBLIC_VARIANT as "apple" | "adobe" | "hybrid") || "hybrid"
-
-  // Track which variant the user sees
-  trackVariant("landing_design", variant)
-
-  return variant
-}
+// Variant selection moved to lib/experiment.ts

@@ -2,9 +2,12 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { usePrice } from "@/components/price-provider"
+import { trackEvent } from "@/lib/analytics"
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const { price } = usePrice()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,13 +19,7 @@ export default function Navbar() {
   }, [])
 
   const handleCTAClick = () => {
-    // Analytics tracking
-    if (typeof window !== "undefined" && window.gtag) {
-      window.gtag("event", "hero_cta_click", {
-        event_category: "engagement",
-        event_label: "navbar_cta",
-      })
-    }
+    trackEvent("hero_cta_click", { category: "engagement", label: "navbar_cta", price })
   }
 
   return (
@@ -51,7 +48,7 @@ export default function Navbar() {
             onClick={handleCTAClick}
             className="bg-gray-900 text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition-colors font-medium"
           >
-            Get your zine for $15
+            {`Get your zine for $${price}`}
           </Link>
         </div>
       </div>
