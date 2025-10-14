@@ -56,10 +56,10 @@ const sourceSerif4 = Source_Serif_4({
 })
 
 export const metadata = {
-  title: "Zine Studio - Turn your camera roll into a printed zine",
+  title: "Framed - Turn your camera roll into a printed zine",
   description: "From digital clutter to a designer-curated keepsake. Launch offer: $15.",
   openGraph: {
-    title: "Zine Studio - Turn your camera roll into a printed zine",
+    title: "Framed - Turn your camera roll into a printed zine",
     description: "From digital clutter to a designer-curated keepsake. Launch offer: $15.",
     type: "website",
   },
@@ -101,12 +101,12 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Product",
-              name: "Zine Studio",
+              name: "Framed",
               description:
                 "Turn your camera roll into a printed zine. From digital clutter to a designer-curated keepsake.",
               brand: {
                 "@type": "Brand",
-                name: "Zine Studio",
+                name: "Framed",
               },
               offers: {
                 "@type": "Offer",

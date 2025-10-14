@@ -8,6 +8,11 @@ This repo is a Next.js 15 + TypeScript + Tailwind CSS landing site, synced from 
 - Analytics: `lib/analytics.ts` automatically attaches `{ test_name: "landing_design", variant }` to events; just call `trackEvent(...)`.
 - Next steps: You can later specify which surfaces to test (copy, layout, CTA style, imagery, motion).
 
+### Price Test (15 vs 40)
+- Module: `lib/price.ts` with context `components/price-provider.tsx` (wrapped in `app/layout.tsx`).
+- Force buckets: `?price=15|40` or `NEXT_PUBLIC_PRICE=15|40`.
+- Usage: Access current price via `usePrice().price`; navbar CTA uses it. Exposure is auto-tracked once per session as `ab_test_view` with `test_name: "price_test"` and `variant: "15"|"40"`.
+
 ## Design Principles (Zen)
 - Minimal, calm UI: plenty of whitespace, 2–3 neutrals, subtle accents.
 - Smooth UX: motion is subtle (150–300ms, ease-out), honors `prefers-reduced-motion`.

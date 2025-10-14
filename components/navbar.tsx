@@ -19,7 +19,12 @@ export default function Navbar() {
   }, [])
 
   const handleCTAClick = () => {
-    trackEvent("hero_cta_click", { category: "engagement", label: "navbar_cta", price })
+    trackEvent("hero_cta_click", {
+      category: "engagement",
+      label: "navbar_cta",
+      price,
+      next_step: "purpose",
+    })
   }
 
   return (
@@ -44,7 +49,7 @@ export default function Navbar() {
 
           {/* CTA Button */}
           <Link
-            href="/themes"
+            href="/start"
             onClick={handleCTAClick}
             className="bg-gray-900 text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition-colors font-medium"
           >
