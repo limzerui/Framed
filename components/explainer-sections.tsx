@@ -18,11 +18,18 @@ export default function ExplainerSections() {
               viewport={{ once: true, margin: "-100px" }}
               className="order-2 lg:order-1"
             >
-              <img
-                src="/open-zine-spread-with-beautiful-photo-layout.jpg"
-                alt="Printed zine spread"
+              <video
+                src="/marketing_without_logo.mp4"
+                aria-label="Framed marketing reel showing printed zine spreads"
                 className="w-full h-[60vh] object-cover rounded-xl shadow-2xl"
-              />
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls={false}
+              >
+                Your browser does not support the video tag.
+              </video>
             </motion.div>
 
             <motion.div
