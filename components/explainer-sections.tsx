@@ -54,7 +54,7 @@ export default function ExplainerSections() {
           <div className="text-center max-w-3xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900">How we curate your story</h2>
             <p className="mt-4 text-xl text-gray-700">
-              Our design experts transform your random camera roll into a cohesive, beautiful narrative.
+              Our Camera Roll to Coffee Table workflow
             </p>
           </div>
 

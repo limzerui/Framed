@@ -10,27 +10,22 @@ const audiences = [
   {
     id: "myself",
     label: "Myself",
-    description: "A personal keepsake to reflect on when you need it.",
   },
   {
     id: "partner",
     label: "My partner",
-    description: "A thoughtful way to revisit your favorite moments together.",
   },
   {
     id: "family",
     label: "Family",
-    description: "Pull scattered memories into something everyone can hold.",
   },
   {
     id: "friend",
     label: "A friend",
-    description: "Surprise someone with snapshots of your inside jokes.",
   },
   {
     id: "team",
     label: "A team or group",
-    description: "Celebrate a shared win or milestone in print.",
   },
 ]
 
@@ -147,7 +142,7 @@ export default function AudiencePage() {
               }`}
             >
               <h3 className="text-xl font-semibold text-gray-900">{audience.label}</h3>
-              <p className="mt-2 text-gray-600">{audience.description}</p>
+              
             </motion.button>
           ))}
         </motion.div>
