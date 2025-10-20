@@ -69,6 +69,13 @@ function RevealContent() {
       theme,
       audience,
     })
+
+    trackEvent("purchase", {
+      category: "conversion",
+      purpose,
+      theme,
+      audience,
+    })
   }, [searchParams])
 
   const friendlyLabels = useMemo(() => {
