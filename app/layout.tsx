@@ -1,6 +1,6 @@
 import type React from "react"
 
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import AnalyticsProvider from "@/components/analytics-provider"
 import ExperimentProvider from "@/components/experiment-provider"
