@@ -1,8 +1,5 @@
 import type React from "react"
 
-import { Analytics } from "@vercel/analytics/next"
-import { SpeedInsights } from "@vercel/speed-insights/next"
-import AnalyticsProvider from "@/components/analytics-provider"
 import ExperimentProvider from "@/components/experiment-provider"
 import PriceProvider from "@/components/price-provider"
 import { Suspense } from "react"
@@ -77,22 +74,18 @@ export default function RootLayout({
       className={`${inter.variable} ${geist.variable} ${geistMono.variable} ${sourceSerif4.variable} antialiased`}
     >
       <head>
-        {/* Google Analytics */}
-        {process.env.NEXT_PUBLIC_GA_ID && (
-          <>
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`} />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-                `,
-              }}
-            />
-          </>
-        )}
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{
+            __html: `
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "${process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID}");
+`,
+          }}
+        />
 
         {/* JSON-LD Structured Data */}
         <script
@@ -120,15 +113,11 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans bg-white text-gray-900">
-        <Analytics />
-        <AnalyticsProvider>
-          <ExperimentProvider>
-            <PriceProvider>
-              <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
-            </PriceProvider>
-          </ExperimentProvider>
-        </AnalyticsProvider>
-        <SpeedInsights />
+        <ExperimentProvider>
+          <PriceProvider>
+            <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+          </PriceProvider>
+        </ExperimentProvider>
       </body>
     </html>
   )
