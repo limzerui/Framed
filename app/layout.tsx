@@ -120,6 +120,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans bg-white text-gray-900">
+        <Analytics />
         <AnalyticsProvider>
           <ExperimentProvider>
             <PriceProvider>
@@ -127,7 +128,6 @@ export default function RootLayout({
             </PriceProvider>
           </ExperimentProvider>
         </AnalyticsProvider>
-        <Analytics />
         <SpeedInsights />
       </body>
     </html>
