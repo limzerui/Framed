@@ -44,6 +44,46 @@ function RevealContent() {
     audience: "unknown",
   })
 
+  const [contactValue, setContactValue] = useState<string>("")
+  const [submissionStatus, setSubmissionStatus] = useState<"idle" | "success" | "error">("idle")
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+
+  const isValidContact = (input: string): boolean => {
+    // Basic validation for Telegram handle or email
+    if (input.startsWith("@")) {
+      return input.length > 1 // Just check if there's something after @
+    } else if (input.includes("@") && input.includes(".")) {
+      return true // Basic email check
+    }
+    return false
+  }
+
+  const handleSubmitContact = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!isValidContact(contactValue)) {
+      setSubmissionStatus("error")
+      return
+    }
+
+    setIsSubmitting(true)
+    setSubmissionStatus("idle")
+
+    try {
+      // Simulate API call or direct analytics tracking
+      trackEvent("contact_info_submitted", {
+        category: "engagement",
+        contact_value: contactValue,
+      })
+      setSubmissionStatus("success")
+      setContactValue("") // Clear input on success
+    } catch (error) {
+      console.error("Failed to submit contact info:", error)
+      setSubmissionStatus("error")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   useEffect(() => {
     const queryPurpose = searchParams.get("event")
     const queryTheme = searchParams.get("theme")
@@ -174,6 +214,44 @@ function RevealContent() {
             </Link>
           </div>
         </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-16 max-w-md mx-auto p-6 bg-white rounded-xl shadow-lg"
+        >
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">Stay in the loop!</h2>
+          <p className="text-gray-600 mb-4">
+            Enter your Telegram handle (e.g., @yourhandle) or email to get updates on Framed.
+          </p>
+          <form onSubmit={handleSubmitContact} className="flex flex-col gap-4">
+            <input
+              type="text"
+              placeholder="@yourhandle or your@email.com"
+              value={contactValue}
+              onChange={(e) => setContactValue(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            />
+            <button
+              type="submit"
+              disabled={isSubmitting || !isValidContact(contactValue)}
+              className={`w-full px-4 py-2 rounded-lg font-semibold text-white transition-colors
+                ${isSubmitting || !isValidContact(contactValue)
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-blue-600 hover:bg-blue-700"}
+              `}
+            >
+              {isSubmitting ? "Submitting..." : "Submit"}
+            </button>
+            {submissionStatus === "success" && (
+              <p className="text-green-600 text-sm">Thanks! We'll keep you updated.</p>
+            )}
+            {submissionStatus === "error" && (
+              <p className="text-red-600 text-sm">Something went wrong. Please try again.</p>
+            )}
+          </form>
+        </motion.div>
       </main>
     </div>
   )
@@ -194,4 +272,14 @@ export default function ThanksPage() {
       <RevealContent />
     </Suspense>
   )
+}
+
+function isValidContact(input: string): boolean {
+  // Basic validation for Telegram handle or email
+  if (input.startsWith("@")) {
+    return input.length > 1 // Just check if there's something after @
+  } else if (input.includes("@") && input.includes(".")) {
+    return true // Basic email check
+  }
+  return false
 }
