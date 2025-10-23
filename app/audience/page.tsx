@@ -67,25 +67,13 @@ export default function AudiencePage() {
       localStorage.setItem("selectedAudience", audienceId)
     }
 
+    const resolvedPurpose = purpose || "undisclosed"
+    const resolvedTheme = theme || "unset"
+
     trackEvent("audience_selected", {
       category: "engagement",
       label: audienceId,
       audience: audienceId,
-      purpose,
-      theme,
-    })
-  }
-
-  const handleContinue = () => {
-    if (!selectedAudience) return
-
-    const resolvedPurpose = purpose || "undisclosed"
-    const resolvedTheme = theme || "unset"
-
-    trackEvent("audience_continue", {
-      category: "conversion",
-      label: selectedAudience,
-      audience: selectedAudience,
       purpose: resolvedPurpose,
       theme: resolvedTheme,
     })
@@ -93,7 +81,7 @@ export default function AudiencePage() {
     router.push(
       `/thanks?event=${encodeURIComponent(resolvedPurpose)}&theme=${encodeURIComponent(
         resolvedTheme,
-      )}&audience=${encodeURIComponent(selectedAudience)}`,
+      )}&audience=${encodeURIComponent(audienceId)}`,
     )
   }
 
@@ -117,7 +105,7 @@ export default function AudiencePage() {
         >
           <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 text-balance">Who will open this zine first?</h1>
           <p className="text-lg text-gray-600 mt-4 max-w-2xl mx-auto text-pretty">
-            A little context helps us tailor the narrative and tone. Pick the answer that feels closest&mdash;we track this to learn what to build next.
+            Choose the scenario that fits best&mdash;we&rsquo;ll recommend layouts with your story in mind. You can still change your mind later.
           </p>
         </motion.div>
 
@@ -148,15 +136,6 @@ export default function AudiencePage() {
         </motion.div>
 
         <div className="mt-12 flex items-center justify-center gap-4">
-          <button
-            onClick={handleContinue}
-            disabled={!selectedAudience}
-            className={`px-8 py-3 rounded-lg font-semibold ${
-              selectedAudience ? "bg-gray-900 text-white hover:bg-gray-800" : "bg-gray-200 text-gray-500 cursor-not-allowed"
-            }`}
-          >
-            Continue
-          </button>
           <Link
             href={`/themes?event=${encodeURIComponent(purpose || "")}`}
             className="text-gray-600 hover:text-gray-900 transition-colors underline underline-offset-4"

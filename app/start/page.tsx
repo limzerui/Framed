@@ -55,19 +55,8 @@ function EventSelection() {
       label: purposeId,
       purpose: purposeId,
     })
-  }
 
-  const handleContinue = () => {
-    if (!selectedPurpose) return
-
-    trackEvent("purpose_continue", {
-      category: "conversion",
-      label: selectedPurpose,
-      purpose: selectedPurpose,
-      price,
-    })
-
-    router.push(`/themes?event=${selectedPurpose}`)
+    router.push(`/themes?event=${purposeId}`)
   }
 
   return (
@@ -123,7 +112,7 @@ function EventSelection() {
                 <div className="flex items-center justify-between">
                   <h3 className="text-xl font-semibold text-gray-900">{purpose.name}</h3>
                   {selectedPurpose === purpose.id && (
-                    <div className="w-8 h-8 rounded-full bg-gray-900 text-white flex items-center justify-center">
+                    <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gray-900 text-white flex items-center justify-center">
                       <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                         <path
                           fillRule="evenodd"
@@ -146,17 +135,6 @@ function EventSelection() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-12 flex flex-col items-center gap-4"
         >
-          <button
-            onClick={handleContinue}
-            disabled={!selectedPurpose}
-            className={`px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 ${
-              selectedPurpose
-                ? "bg-gray-900 text-white hover:bg-gray-800 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-                : "bg-gray-200 text-gray-400 cursor-not-allowed"
-            }`}
-          >
-            Continue · ${price}
-          </button>
           <Link
             href="/"
             className="text-gray-600 hover:text-gray-900 transition-colors underline underline-offset-4"

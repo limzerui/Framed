@@ -73,27 +73,16 @@ export default function ThemesPage() {
       localStorage.setItem("selectedStyle", themeId)
     }
 
+    const resolvedPurpose = purpose || "undisclosed"
+
     trackEvent("theme_selected", {
       category: "engagement",
       label: themeId,
       theme: themeId,
-      purpose,
-    })
-  }
-
-  const handleContinue = () => {
-    if (!selected) return
-
-    const resolvedPurpose = purpose || "undisclosed"
-
-    trackEvent("theme_continue", {
-      category: "conversion",
-      label: selected,
-      theme: selected,
       purpose: resolvedPurpose,
     })
 
-    router.push(`/audience?event=${encodeURIComponent(resolvedPurpose)}&theme=${encodeURIComponent(selected)}`)
+    router.push(`/audience?event=${encodeURIComponent(resolvedPurpose)}&theme=${encodeURIComponent(themeId)}`)
   }
 
   return (
@@ -153,7 +142,7 @@ export default function ThemesPage() {
                 <div className="flex items-center justify-between">
                   <span className="text-lg font-semibold text-gray-900">{t.name}</span>
                   {selected === t.id && (
-                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-900 text-white">
+                    <span className="inline-flex h-6 w-6 md:h-8 md:w-8 items-center justify-center rounded-full bg-gray-900 text-white">
                       <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path
                           fillRule="evenodd"
@@ -175,17 +164,6 @@ export default function ThemesPage() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-12 flex flex-col items-center gap-4"
         >
-          <button
-            onClick={handleContinue}
-            disabled={!selected}
-            className={`px-8 py-3 rounded-lg font-semibold transition-colors ${
-              selected
-                ? "bg-gray-900 text-white hover:bg-gray-800"
-                : "bg-gray-200 text-gray-500 cursor-not-allowed"
-            }`}
-          >
-            Continue
-          </button>
           <Link
             href="/start"
             className="text-gray-600 hover:text-gray-900 transition-colors underline underline-offset-4"

@@ -157,8 +157,7 @@ function RevealContent() {
             Thanks for walking through our prototype.
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto text-pretty">
-            We&apos;re experimenting with how people plan their photo zines. The steps you saw are part of an A/B test that helps us decide
-            what to build next.
+
           </p>
         </motion.div>
 
@@ -221,9 +220,9 @@ function RevealContent() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-16 max-w-md mx-auto p-6 bg-white rounded-xl shadow-lg"
         >
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Stay in the loop!</h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">Feel this is interesting?</h2>
           <p className="text-gray-600 mb-4">
-            Enter your Telegram handle (e.g., @yourhandle) or email to get updates on Framed.
+            We&apos;ll update you on our full product launch.
           </p>
           <form onSubmit={handleSubmitContact} className="flex flex-col gap-4">
             <input
