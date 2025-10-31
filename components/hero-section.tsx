@@ -62,15 +62,24 @@ export default function HeroSection() {
             Designer‑curated zines that feel personal.
           </motion.p>
 
-          {/* CTA Group (only secondary link) */}
-          <motion.a
-              href="#how-it-works"
-              onClick={handleSecondaryCTA}
-              whileHover={{ y: prefersReducedMotion() ? 0 : -2 }}
-              className="text-gray-700 hover:text-gray-900 font-medium text-lg underline underline-offset-4 hover:underline-offset-8 transition-all duration-200"
+          {/* CTA Group */}
+          <motion.div variants={fadeInUp} className="flex flex-col justify-center items-center gap-4">
+            <Link
+              href="/start"
+              onClick={() => trackEvent("hero_cta_click", { category: "engagement", label: "try_me_cta" })}
+              className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-900 hover:bg-gray-700 transition-colors duration-200"
             >
-              See how it works
-          </motion.a>
+              Try Me
+            </Link>
+            <motion.a
+                href="#how-it-works"
+                onClick={handleSecondaryCTA}
+                whileHover={{ y: prefersReducedMotion() ? 0 : -2 }}
+                className="text-gray-700 hover:text-gray-900 font-medium text-lg underline underline-offset-4 hover:underline-offset-8 transition-all duration-200"
+              >
+                See how it works
+            </motion.a>
+          </motion.div>
         </motion.div>
       </div>
 
@@ -90,7 +99,7 @@ export default function HeroSection() {
       </motion.div>
 
       {/* Gradient overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-white/40 z-5" />
+      <div className="absolute inset-0 bg-gradient-to-t from-white/10 via-transparent to-white/20 z-5" />
     </section>
   )
 }
