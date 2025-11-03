@@ -41,7 +41,7 @@ export default function InteractiveSlider() {
         style={{ clipPath }}
       >
         <video
-          src="/clutter.mov"
+          src="/clutter.mp4"
           alt="Clutter video"
           className="absolute inset-0 w-full h-full object-cover"
           autoPlay
