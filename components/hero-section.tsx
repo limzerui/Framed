@@ -59,17 +59,17 @@ export default function HeroSection() {
 
           {/* Subheading */}
           <motion.p variants={fadeInUp} className="text-lg sm:text-xl text-black mb-8 max-w-2xl mx-auto text-pretty">
-            Designer‑curated zines that feel personal.
+            Go from camera roll clutter to a printed zine in minutes.
           </motion.p>
 
           {/* CTA Group */}
           <motion.div variants={fadeInUp} className="flex flex-col justify-center items-center gap-4">
             <Link
               href="/start"
-              onClick={() => trackEvent("hero_cta_click", { category: "engagement", label: "try_me_cta" })}
+              onClick={() => trackEvent("hero_cta_click", { category: "engagement", label: "primary_cta" })}
               className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-900 hover:bg-gray-700 transition-colors duration-200"
             >
-              Try Me
+              Make My Zine
             </Link>
             <motion.a
                 href="#how-it-works"
@@ -77,7 +77,7 @@ export default function HeroSection() {
                 whileHover={{ y: prefersReducedMotion() ? 0 : -2 }}
                 className="text-gray-700 hover:text-gray-900 font-medium text-lg underline underline-offset-4 hover:underline-offset-8 transition-all duration-200"
               >
-                See how it works
+                See how it works ↓
             </motion.a>
           </motion.div>
         </motion.div>
